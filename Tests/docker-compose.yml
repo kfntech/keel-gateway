@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+    gateway:
+        image: openresty/openresty:alpine
+        ports:
+            - 0.0.0.0:80:80
+        volumes:
+            - ./conf.d:/etc/nginx/conf.d
+    keel:
+        image: node:alpine
+        ports:
+            - 0.0.0.0:9300:9300
+        volumes:
+            - ./app:/app
+        command: node /app/index.js
